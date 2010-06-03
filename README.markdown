@@ -1,20 +1,20 @@
 Readown
 =======
 
-Readown은 [Markdown][1] 형식의 텍스트 파일을 읽기 위한 Mac OS X용 어플리케이션입니다. [홍민희][2]가 Cocoa를 처음 배우면서 제작해봤습니다(아이콘은 [이흥섭][3]이 그렸습니다). 소스 코드와 함께 [LGPL][4]로 배포됩니다. 버그 신고 및 기타 문의 사항은 제 이메일이나 [미투데이][5]로 해주세요. 제 이메일 주소는 [홈페이지][2]에서 찾을 수 있습니다.
+Readown은 [Markdown][1] 형식의 텍스트 파일을 읽기 위한 Mac OS X용 애플리케이션입니다. [홍민희][2]가 Cocoa를 처음 배우면서 제작해봤습니다(아이콘은 [이흥섭][3]이 그렸습니다). 소스 코드와 함께 [LGPL][4]로 배포됩니다. 버그 신고 및 기타 문의 사항은 제 이메일이나 [미투데이][5]로 해주세요. 제 이메일 주소는 [홈페이지][2]에서 찾을 수 있습니다.
 
-![Readown 화면](http://justhing.dahlia.kr/readown/images/capture-20080413.png)
+![Readown 화면](http://h.imagehost.org/0576/Screen_shot_2010-06-03_at_3_04_28_AM.png)
 
 구하기                                                               {#download}
 ------
 
 디스크 이미지 파일을 아래 페이지에서 구할 수 있습니다.
 
->   <http://justhing.dahlia.kr/readown/>
+>   <http://code.google.com/p/readown/downloads/list>
 
 소스 코드는 Subversion을 통해 구할 수 있습니다.
 
-	svn co http://svn.dahlia.kr/Projects/Readown
+	svn checkout http://readown.googlecode.com/svn/trunk/ readown-read-only
 
 열 수 있는 확장자
 -----------------
