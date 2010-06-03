@@ -17,14 +17,8 @@ hdiutil create -fs HFS+ -ov -type SPARSE -volname "${VOLNAME}" -fsargs "-c c=64,
 hdiutil attach "${SPARSEPATH}"
 
 ditto "${BUILT_PRODUCTS_DIR}/${PROJECT_NAME}.app" "/Volumes/${VOLNAME}/${PROJECT_NAME}.app"
-#ditto "${PROJECT_DIR}/Resources/documentation/Licence.rtf" "/Volumes/${VOLNAME}/Licence.rtf"
-#ditto "${PROJECT_DIR}/Resources/documentation/Licence_CeCILL_V2-fr.txt" "/Volumes/${VOLNAME}/#Licence_CeCILL_V2-fr.txt"
-#ditto "${PROJECT_DIR}/Resources/documentation/Licence_CeCILL_V2-en.txt" "/Volumes/${VOLNAME}/#Licence_CeCILL_V2-en.txt"
-#ditto "${PROJECT_DIR}/Resources/documentation/OgreKit-License.txt" "/Volumes/${VOLNAME}/OgreKit-#License.txt"
-#ditto "${PROJECT_DIR}/Resources/documentation/Lisez-moi.rtfd" "/Volumes/${VOLNAME}/Lisez-moi.rtfd"
-#ditto "${PROJECT_DIR}/Resources/documentation/Read Me.rtfd" "/Volumes/${VOLNAME}/Read Me.rtfd"
-#ditto "${PROJECT_DIR}/Resources/documentation/Lies mich.rtfd" "/Volumes/${VOLNAME}/Lies mich.rtfd"
-#ditto "${PROJECT_DIR}/Resources/documentation/Léeme.rtfd" "/Volumes/${VOLNAME}/Léeme.rtfd"
+ditto "${PROJECT_DIR}/LICENSE.markdown" "/Volumes/${VOLNAME}/License.markdown"
+ditto "${PROJECT_DIR}/README.markdown" "/Volumes/${VOLNAME}/Readme.markdown"
 
 hdiutil detach "/Volumes/${VOLNAME}"
 hdiutil compact "${SPARSEPATH}"
