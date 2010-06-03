@@ -10,6 +10,7 @@
 #import <WebKit/WebKit.h>
 
 @implementation MarkdownDocument
+@synthesize webView;
 
 - (id)init
 {
@@ -47,19 +48,27 @@
 
 - (BOOL)readFromURL:(NSURL *)url ofType:(NSString *)type error:(NSError **)outError
 {
-	baseURL = url;
-	text = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error: outError];
+	baseURL = [url retain];
+	text = [[NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:outError] retain];
 
     return YES;
 }
 
 - (void)awakeFromNib
 {
-	NSString *html = [text stringWithMarkdownAndSmartyPants];
-	html = [NSString stringWithFormat:@"<html><body>%@</body></html>", html];
-	[[webView mainFrame] loadHTMLString:html baseURL:baseURL];
-	[webView setPolicyDelegate:self];
+    [self loadFromBaseURL];
+	//[webView setPolicyDelegate:self];
+    
+    //[[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:tempFilePath]]];
 }
+
+- (void)loadFromBaseURL {
+    text = [NSString stringWithContentsOfURL:baseURL encoding:NSUTF8StringEncoding error:nil];
+    NSString *html = [NSString stringWithFormat:@"<html><body>%@</body></html>", [text stringWithMarkdownAndSmartyPants]];
+
+    [[webView mainFrame] loadHTMLString:html baseURL:baseURL];
+}
+    
 
 - (void)webView:(WebView *)sender decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id<WebPolicyDecisionListener>)listener
 {
@@ -72,4 +81,13 @@
 	[self webView:sender decidePolicyForNavigationAction:actionInformation request:request frame:[webView mainFrame] decisionListener:listener];
 }
 
+- (IBAction)reload:(id)sender {
+    [self loadFromBaseURL];
+    //[[webView mainFrame] reload];
+}
+
+- (void)dealloc {
+    [baseURL release];
+    [super dealloc];
+}
 @end
