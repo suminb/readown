@@ -6,6 +6,21 @@
 	objectVersion = 42;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		74BFD50711B7ACF4001DD957 /* Packaging as dmg */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 74BFD50B11B7AD12001DD957 /* Build configuration list for PBXAggregateTarget "Packaging as dmg" */;
+			buildPhases = (
+				74BFD50611B7ACF4001DD957 /* ShellScript */,
+			);
+			dependencies = (
+				747569F811B7AF9C00FAD1F4 /* PBXTargetDependency */,
+			);
+			name = "Packaging as dmg";
+			productName = Packaging;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		1A4CBE380DB0F94200E03D28 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A4CBE370DB0F94200E03D28 /* WebKit.framework */; };
 		1A4CBE620DB0FBD000E03D28 /* Markdown.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A4CBE610DB0FBD000E03D28 /* Markdown.m */; };
@@ -20,6 +35,16 @@
 		8D15AC320486D014006FF6A4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A37F4B0FDCFA73011CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D15AC340486D014006FF6A4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A7FEA54F5311CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		747569F711B7AF9C00FAD1F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2A37F4A9FDCFA73011CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D15AC270486D014006FF6A4 /* Readown */;
+			remoteInfo = Readown;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		089C1660FE840EACC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -40,6 +65,7 @@
 		2A37F4C4FDCFA73011CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		2A37F4C5FDCFA73011CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		32DBCF750370BD2300C91783 /* Readown_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Readown_Prefix.pch; sourceTree = "<group>"; };
+		74BFD4F711B7ABF7001DD957 /* packaging-dmg.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "packaging-dmg.sh"; sourceTree = "<group>"; };
 		8D15AC360486D014006FF6A4 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D15AC370486D014006FF6A4 /* Readown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Readown.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -86,6 +112,7 @@
 		1A4CBE6B0DB1009200E03D28 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
+				74BFD4F711B7ABF7001DD957 /* packaging-dmg.sh */,
 				1A4CBE6C0DB100B300E03D28 /* Markdown.php */,
 				1A4CBE6D0DB100B300E03D28 /* SmartyPants.php */,
 			);
@@ -183,6 +210,7 @@
 			projectRoot = "";
 			targets = (
 				8D15AC270486D014006FF6A4 /* Readown */,
+				74BFD50711B7ACF4001DD957 /* Packaging as dmg */,
 			);
 		};
 /* End PBXProject section */
@@ -204,6 +232,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		74BFD50611B7ACF4001DD957 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${PROJECT_DIR}/packaging-dmg.sh";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8D15AC300486D014006FF6A4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -216,6 +260,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		747569F811B7AF9C00FAD1F4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D15AC270486D014006FF6A4 /* Readown */;
+			targetProxy = 747569F711B7AF9C00FAD1F4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		089C165FFE840EACC02AAC07 /* InfoPlist.strings */ = {
@@ -245,6 +297,29 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		74BFD50811B7ACF4001DD957 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = "";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = Packaging;
+				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+			};
+			name = Debug;
+		};
+		74BFD50911B7ACF4001DD957 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = Packaging;
+				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		C05733C808A9546B00998B17 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -267,15 +342,14 @@
 		C05733C908A9546B00998B17 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1)";
+				ARCHS_STANDARD_32_64_BIT_PRE_XCODE_3_1 = "x86_64 i386 ppc";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_MODEL_TUNING = G5;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				PRODUCT_NAME = Readown;
+				SDKROOT = /Developer/SDKs/MacOSX10.5.sdk;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -303,6 +377,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		74BFD50B11B7AD12001DD957 /* Build configuration list for PBXAggregateTarget "Packaging as dmg" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				74BFD50811B7ACF4001DD957 /* Debug */,
+				74BFD50911B7ACF4001DD957 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C05733C708A9546B00998B17 /* Build configuration list for PBXNativeTarget "Readown" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
