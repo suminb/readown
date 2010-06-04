@@ -9,6 +9,84 @@
 #import "Markdown.h"
 #import <WebKit/WebKit.h>
 
+@interface MarkdownDocument(Private)
+- (void)initFSEventStream;
+- (BOOL)hasFileModified;
+- (void)reloadIfFileModified;
+@end
+
+// This is probably a bad design, but I don't know where else to put.
+// I'm gonna have to make a view controller or something later on.
+@implementation MarkdownDocument(Private)
+#pragma mark File system event handlings and other file operations
+
+void fsEventCallback(ConstFSEventStreamRef streamRef,
+                     void *userData,
+                     size_t numEvents,
+                     void *eventPaths,
+                     const FSEventStreamEventFlags eventFlags[],
+                     const FSEventStreamEventId eventIds[]) {
+	
+    MarkdownDocument *md = (MarkdownDocument*)userData;
+    [md reloadIfFileModified];
+    
+//	NSLog(@"# of events = %d", numEvents);
+//    size_t i;
+//	for(i=0; i < numEvents; i++){
+//		NSString *str = [(NSArray *)eventPaths objectAtIndex:i];
+//		NSLog(@"Filesystem has been modified! %@", str);
+//	}
+}
+
+
+- (void)initFSEventStream {
+    NSLog(@"Watching %@", [[baseURL path] stringByDeletingLastPathComponent]);    
+    
+	NSArray *pathsToWatch = [NSArray arrayWithObject:[[baseURL path] stringByDeletingLastPathComponent]];
+	FSEventStreamContext context = {0, (void *)self, NULL, NULL, NULL};
+	FSEventStreamRef stream;
+	CFAbsoluteTime latency = 1.0; // Latency in seconds
+	
+	/* Create the stream, passing in a callback */
+	stream = FSEventStreamCreate(NULL,
+								 &fsEventCallback,
+								 &context,
+								 (CFArrayRef) pathsToWatch,
+								 kFSEventStreamEventIdSinceNow, /* Or a previous event ID */
+								 (CFAbsoluteTime) latency,
+								 kFSEventStreamCreateFlagUseCFTypes
+								 );
+	
+	FSEventStreamScheduleWithRunLoop(stream, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
+	FSEventStreamStart(stream);
+}
+
+- (BOOL)hasFileModified {
+    //(NSDictionary *)fileAttributesAtPath:(NSString *)path traverseLink:(BOOL)flag   
+    NSDictionary *attributes = [[NSFileManager defaultManager] fileAttributesAtPath:[baseURL path] traverseLink:NO];
+    NSDate *modificationDate = [attributes objectForKey:@"NSFileModificationDate"];
+    
+    if([modificationDate isEqualToDate:lastModified]) {
+        return NO;
+    }
+    else {
+        [lastModified release];
+        lastModified = [modificationDate retain];
+        
+        return YES;
+    }
+}
+
+- (void)reloadIfFileModified {
+    if ([self hasFileModified]) {
+        NSLog(@"File has been modified. Reloading the page.");
+        [self loadFromBaseURL];
+    }
+}
+
+@end
+
+
 @implementation MarkdownDocument
 @synthesize webView;
 
@@ -50,6 +128,9 @@
 {
 	baseURL = [url retain];
 	text = [[NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:outError] retain];
+    
+    // Watching file system events
+    [self initFSEventStream];
 
     return YES;
 }
@@ -66,7 +147,7 @@
     text = [NSString stringWithContentsOfURL:baseURL encoding:NSUTF8StringEncoding error:nil];
     NSString *html = [NSString stringWithFormat:@"<html><body>%@</body></html>", [text stringWithMarkdownAndSmartyPants]];
     
-    NSLog(@"%@", html);
+    //NSLog(@"%@", html);
 
     [[webView mainFrame] loadHTMLString:html baseURL:baseURL];
 }
@@ -92,4 +173,5 @@
     [baseURL release];
     [super dealloc];
 }
+
 @end

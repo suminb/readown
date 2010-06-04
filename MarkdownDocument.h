@@ -14,6 +14,7 @@
 {
 	NSString *text;
 	NSURL* baseURL;
+    NSDate *lastModified;
 	IBOutlet WebView *webView;
 }
 
