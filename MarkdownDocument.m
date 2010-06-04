@@ -65,6 +65,8 @@
 - (void)loadFromBaseURL {
     text = [NSString stringWithContentsOfURL:baseURL encoding:NSUTF8StringEncoding error:nil];
     NSString *html = [NSString stringWithFormat:@"<html><body>%@</body></html>", [text stringWithMarkdownAndSmartyPants]];
+    
+    NSLog(@"%@", html);
 
     [[webView mainFrame] loadHTMLString:html baseURL:baseURL];
 }

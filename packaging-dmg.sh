@@ -4,7 +4,6 @@
 # Readown
 #
 # Created by Sumin Byeon on 6/3/10.
-# Copyright 2010 Sumin Byeon. All rights reserved.
 
 VERSION=$(defaults read "${BUILT_PRODUCTS_DIR}/${PROJECT_NAME}.app/Contents/Info" CFBundleVersion)
 VERSION2=`echo "${VERSION}" | sed "s/\\./_/g" | sed "s/\\ /-/g"`
