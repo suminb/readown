@@ -97,7 +97,7 @@ void fsEventCallback(ConstFSEventStreamRef streamRef,
     
         // Add your subclass-specific initialization here.
         // If an error occurs here, send a [self release] message and return nil.
-    
+
     }
     return self;
 }
@@ -145,9 +145,23 @@ void fsEventCallback(ConstFSEventStreamRef streamRef,
 
 - (void)loadFromBaseURL {
     text = [NSString stringWithContentsOfURL:baseURL encoding:NSUTF8StringEncoding error:nil];
-    NSString *html = [NSString stringWithFormat:@"<html><body>%@</body></html>", [text stringWithMarkdownAndSmartyPants]];
+    NSString *html = nil;
+
+    NSString *filename = [[baseURL path] stringByDeletingPathExtension];
     
-    //NSLog(@"%@", html);
+    // look for CSS file that has the same file name
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *cssPath = [filename stringByAppendingString:@".css"];
+    if([fileManager fileExistsAtPath:cssPath]) {
+        // TODO: need exception handlings
+        NSString *css = [NSString stringWithContentsOfFile:cssPath];
+        
+        // TODO:
+        html = [NSString stringWithFormat:@"<html><head><style>%@</style></head><body>%@</body></html>", css, [text stringWithMarkdownAndSmartyPants]];
+    }
+    else {
+        html = [NSString stringWithFormat:@"<html><body>%@</body></html>", [text stringWithMarkdownAndSmartyPants]];
+    }
 
     [[webView mainFrame] loadHTMLString:html baseURL:baseURL];
 }
