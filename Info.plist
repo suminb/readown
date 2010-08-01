@@ -11,6 +11,7 @@
 			<array>
 				<string>markdown</string>
 				<string>mkdn</string>
+				<string>md</string>
 				<string>text</string>
 				<string>txt</string>
 			</array>
